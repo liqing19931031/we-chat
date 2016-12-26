@@ -20,19 +20,20 @@ const router = new VueRouter({
 		},
 		{
 			path: '/home',
-      		component: home
-    	},
-    	{
-    		path: '/login',
-    		compnent: login
-    	},
-    	{
+      component: home
+    },
+    {
+    	path: '/login',
+    	component: login
+    },
+    {
 			path: '/user',
-      		component: user
-    	}
-  //   	 		path: '/ptoducts',
-  //     		component: ptoducts
-  //   	},
+      component: user
+    }
+  	// {
+   //  	path: '/popular',
+   //    component: popular
+   //  }
   //   	{
   //     		path: '/photo',
   //     		component: photo
