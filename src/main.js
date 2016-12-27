@@ -5,8 +5,8 @@ import VueResource from 'vue-resource'
 import home from './home/home.vue'
 import login from './login/login.vue'
 import user from './user/user.vue'
-// import popular from './popular/popular.vue'
-// import report from './report/report.vue'
+import pop from './pop/pop.vue'
+import report from './report/report.vue'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
@@ -29,15 +29,15 @@ const router = new VueRouter({
     {
 			path: '/user',
       component: user
+    },
+    {
+      path: '/pop',
+      component: pop
+    },
+    {
+      path: '/report',
+      component: report
     }
-  	// {
-   //  	path: '/popular',
-   //    component: popular
-   //  }
-  //   	{
-  //     		path: '/photo',
-  //     		component: photo
-  //   	}
 	]
 })
 

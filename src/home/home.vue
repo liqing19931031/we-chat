@@ -1,17 +1,121 @@
 <template>
 	<div class="we-contain">
-		<div class="we-content">
-			<div class="weui-panel__ft">
-                <a href="" class="weui-cell weui-cell_access weui-cell_link">
-                    <div class="weui-cell__bd">查看详情</div>
-                    <span class="weui-cell__ft"></span>
-                </a>
-                <div class="we-content">
-                	<div class="we-content_lf">
-                		
-                	</div>
-                </div> 
-            </div>
+		<div class="we-content page flex">
+			<div class="we-home__header">
+				<div class="weui-flex">
+		            <div class="weui-flex__item">
+		            	<div class="placeholder h0">{{user.name}}</div>
+		            </div>
+		        </div>
+		        <div style="text-align:center">
+		        	<img :src="require('../assets/loginbg.png')" alt="">
+		        </div>
+		        <div class="weui-flex common-bottom">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h2">账户余额</div>
+		        		<div class="placeholder h1">￥{{user.balance}}</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h2">有效计划个数</div>
+		        		<div class="placeholder h1">{{user.budget}}个</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h2">有效日预算</div>
+		        		<div class="placeholder h1">￥{{user.planNum}}</div>
+		        	</div>
+		        </div>
+			</div>
+	        <div class="weui-content">
+	        	<div class="weui-flex">
+		            <div class="weui-flex__item">
+		            	<div class="placeholder h4">网络联盟推广</div>
+		            </div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">总花费</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">展现总量</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{pcData.allCost}}</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{pcData.showNum}}</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">点击总量</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">点击单价</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{pcData.clickNum}}</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{pcData.averagePrice}}</div>
+		        	</div>
+		        </div>
+				<div class="weui-panel__ft">
+	                <a class="weui-cell weui-cell_access weui-cell_link" @click='gopop(1)'>
+	                    <div class="weui-cell__bd">查看详情</div>
+	                    <span class="weui-cell__ft"></span>
+	                </a>
+	            </div>
+	        </div>
+	        <div class="weui-content">
+	        	<div class="weui-flex">
+		            <div class="weui-flex__item">
+		            	<div class="placeholder h4">移动联盟推广</div>
+		            </div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">总花费</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">展现总量</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{mbData.allCost}}</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{mbData.showNum}}</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">点击总量</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h3">千次展现成本</div>
+		        	</div>
+		        </div>
+		        <div class="weui-flex">
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{mbData.clickNum}}</div>
+		        	</div>
+		        	<div class="weui-flex__item">
+		        		<div class="placeholder h5">￥{{mbData.clickPrice}}</div>
+		        	</div>
+		        </div>
+				<div class="weui-panel__ft">
+	                <a class="weui-cell weui-cell_access weui-cell_link" @click='gopop(2)'>
+	                    <div class="weui-cell__bd">查看详情</div>
+	                    <span class="weui-cell__ft"></span>
+	                </a>
+	            </div>
+	        </div>
+	        <div class="white-block"></div>
 		</div>
 	</div>
 </template>
@@ -20,7 +124,8 @@ var user = {
 	balance: 1000,
 	budget: 1000,
 	planNum: 8000,
-	name: '盘石宇宙网盟'
+	name: '盘石宇宙网盟',
+	state: 2
 }
 var pcData = {
 	allCost: 1000,
@@ -30,11 +135,11 @@ var pcData = {
 	averagePrice: 1200
 }
 var mbData = {
-	allCost: 1000,
-	showNum: 12000,
-	clickNum: 5000,
-	clickPrice: 3000,
-	averagePrice: 1200
+	allCost: 2000,
+	showNum: 32000,
+	clickNum: 4000,
+	clickPrice: 5000,
+	averagePrice: 4200
 }
 export default {
 	data () {
@@ -43,13 +148,26 @@ export default {
 			pcData: pcData,
 			mbData: mbData
 		}
+	},
+	methods: {
+		gopop: function(index) {
+			this.$router.push('/pop')
+		}
 	}
 }
 </script>
 <style lang='less'>
 	.we-contain{
 		height: 100%;
-		background-color: #f8f8f8;
+		.we-home__header{
+			padding-top: 10px;
+			background-image: url(../assets/index_bg.jpg);
+			background-size: 100% 100%;
+			img{
+				width: 65px;
+				height: 18px;
+			}
+		}
 		.weui-panel__ft{
 			background-color: white;
 			a{
@@ -63,6 +181,28 @@ export default {
 					height: 150px;
 				}
 			}
+			.we-company{
+				font-size: 20px;
+			}
 		}
+	}
+	.weui-flex{
+		padding: 0 15px;
+	}
+	.weui-content{
+		background-color: #fff;
+		.weui-flex:nth-child(4){
+			padding-top: 10px;
+		}
+		.weui-flex:nth-child(5){
+			padding-bottom: 20px;
+		}
+	}
+	.weui-content{
+		margin-top: 10px;
+	}
+	.common-bottom{
+		padding:0 15px;
+		margin-bottom: 5px;
 	}
 </style>
