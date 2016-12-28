@@ -37,7 +37,7 @@
 		            <div class="weui-cell__ft">{{value}}</div>
 		        </div>
 	        </div>
-	        <div class="button-sp-area" style="margin:30px 15px">
+	        <div class="button-sp-area" style="margin:30px 15px 0 15px">
 	        	<a href='/login' class="weui-btn weui-btn_default">退出登录</a>
 	        </div>
 	        <div class="white-block"></div>

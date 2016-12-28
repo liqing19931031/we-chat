@@ -40,8 +40,8 @@ const router = new VueRouter({
     }
 	]
 })
-
+Vue.prototype.baseUrl = 'http://wx.test.com/';
 const app = new Vue({
 	router: router,
-	render: h => h(App)
+	render: h => h(App),
 }).$mount('#app')

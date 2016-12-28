@@ -60,7 +60,7 @@
 		        		<div class="placeholder h5">￥{{pcData.clickNum}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{pcData.averagePrice}}</div>
+		        		<div class="placeholder h5">￥{{pcData.clickPrice}}</div>
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
@@ -105,7 +105,7 @@
 		        		<div class="placeholder h5">￥{{mbData.clickNum}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{mbData.clickPrice}}</div>
+		        		<div class="placeholder h5">￥{{mbData.costPrice}}</div>
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
@@ -132,14 +132,18 @@ var pcData = {
 	showNum: 12000,
 	clickNum: 5000,
 	clickPrice: 3000,
-	averagePrice: 1200
+	averagePrice: 1200,
+	costPrice: 100,
+	clickRate: 100
 }
 var mbData = {
 	allCost: 2000,
 	showNum: 32000,
 	clickNum: 4000,
 	clickPrice: 5000,
-	averagePrice: 4200
+	averagePrice: 4200,
+	costPrice: 100,
+	clickRate: 100
 }
 export default {
 	data () {
@@ -195,7 +199,7 @@ export default {
 			padding-top: 10px;
 		}
 		.weui-flex:nth-child(5){
-			padding-bottom: 20px;
+			padding-bottom: 10px;
 		}
 	}
 	.weui-content{

@@ -104,6 +104,7 @@ body{
     margin: 5px;
       height: 2.3em;
       line-height: 2.3em;
+      font-size: 14px;
       &.h0{
         font-size: 17px;
         color:white;
@@ -113,10 +114,15 @@ body{
         color: #ffbe00;
         text-align: center;
         margin: 0;
+        font-size: 15px;
+        height: 1.8em;
+        line-height: 1.8em;
       }
       &.h2{
         color: #fff;
         margin: 0;
+        height: 1.8em;
+        line-height: 1.8em;
         padding-left: 0;
         padding-right: 0;
         text-align: center;
@@ -133,7 +139,7 @@ body{
       &.h4{
         margin-left: 0;
         color: black;
-        font-size: 20px;
+        font-size: 17px;
       }
       &.h5{
         height: 1.5em;
