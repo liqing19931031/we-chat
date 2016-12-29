@@ -19,8 +19,13 @@
           </router-link>
         </a>
         <a class="weui-tabbar__item">
+          <div class="weui-actionsheet__menu" v-if="showNav">
+              <div class="weui-actionsheet__cell"><a link-to>全景推广报告</a></div>
+              <div class="weui-actionsheet__cell"><a link-to>网盟推广报告</a></div>
+              <div class="weui-actionsheet__cell"><a link-to>移动推广报告</a></div>
+          </div>
           <router-link to="/report">
-            <span style="display: inline-block;position: relative;">
+            <span style="display: inline-block;position: relative;" @click='shownav'>
                 <img :src="require('./assets/icon_tabbar.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">报告</p>
@@ -35,17 +40,23 @@
     </div>
   </div>
 </template>
-
 <script>
+let showNav
 export default {
   name: 'app',
   data () {
     return {
       isdoc: this.meta === 1 ? false : true,
+      showNav: false,
       transitionName: 'slide-left'
     }
   },
   components: {
+  },
+  methods: {
+    shownav: function(){
+      this.showNav = !this.showNav
+    }
   }
 }
 </script>
@@ -98,6 +109,17 @@ body{
 .nopadding{
   padding-left: 0!important;
   padding-right: 0!important;
+}
+.weui-actionsheet__menu{
+  position: absolute;
+  bottom: 53px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 8px 0px rgba(112, 111, 107, 0.75);
+  .weui-actionsheet__cell{
+    padding: 10px 0;
+    margin: 0 10px;
+    font-size: 12px;
+  }
 }
 .page {
   .placeholder{

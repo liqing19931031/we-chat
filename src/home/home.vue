@@ -1,7 +1,7 @@
 <template>
 	<div class="we-contain">
 		<div class="we-content page flex">
-			<div class="we-home__header">
+			<div class="we-home__header" v-if="user">
 				<div class="weui-flex">
 		            <div class="weui-flex__item">
 		            	<div class="placeholder h0">{{user.name}}</div>
@@ -25,10 +25,10 @@
 		        	</div>
 		        </div>
 			</div>
-	        <div class="weui-content">
+	        <div class="weui-content" v-if="pcData">
 	        	<div class="weui-flex">
 		            <div class="weui-flex__item">
-		            	<div class="placeholder h4">网络联盟推广</div>
+		            	<div class="placeholder h4">网站联盟推广</div>
 		            </div>
 		        </div>
 		        <div class="weui-flex">
@@ -44,7 +44,7 @@
 		        		<div class="placeholder h5">￥{{pcData.allCost}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{pcData.showNum}}</div>
+		        		<div class="placeholder h5">{{pcData.showNum}}</div>
 		        	</div>
 		        </div>
 		        <div class="weui-flex">
@@ -57,7 +57,7 @@
 		        </div>
 		        <div class="weui-flex">
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{pcData.clickNum}}</div>
+		        		<div class="placeholder h5">{{pcData.clickNum}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
 		        		<div class="placeholder h5">￥{{pcData.clickPrice}}</div>
@@ -70,7 +70,7 @@
 	                </a>
 	            </div>
 	        </div>
-	        <div class="weui-content">
+	        <div class="weui-content" v-if="mbData">
 	        	<div class="weui-flex">
 		            <div class="weui-flex__item">
 		            	<div class="placeholder h4">移动联盟推广</div>
@@ -89,7 +89,7 @@
 		        		<div class="placeholder h5">￥{{mbData.allCost}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{mbData.showNum}}</div>
+		        		<div class="placeholder h5">{{mbData.showNum}}</div>
 		        	</div>
 		        </div>
 		        <div class="weui-flex">
@@ -102,7 +102,7 @@
 		        </div>
 		        <div class="weui-flex">
 		        	<div class="weui-flex__item">
-		        		<div class="placeholder h5">￥{{mbData.clickNum}}</div>
+		        		<div class="placeholder h5">{{mbData.clickNum}}</div>
 		        	</div>
 		        	<div class="weui-flex__item">
 		        		<div class="placeholder h5">￥{{mbData.costPrice}}</div>
@@ -120,31 +120,9 @@
 	</div>
 </template>
 <script>
-var user = {
-	balance: 1000,
-	budget: 1000,
-	planNum: 8000,
-	name: '盘石宇宙网盟',
-	state: 2
-}
-var pcData = {
-	allCost: 1000,
-	showNum: 12000,
-	clickNum: 5000,
-	clickPrice: 3000,
-	averagePrice: 1200,
-	costPrice: 100,
-	clickRate: 100
-}
-var mbData = {
-	allCost: 2000,
-	showNum: 32000,
-	clickNum: 4000,
-	clickPrice: 5000,
-	averagePrice: 4200,
-	costPrice: 100,
-	clickRate: 100
-}
+let user
+let pcData
+let mbData
 export default {
 	data () {
 		return {
@@ -153,8 +131,13 @@ export default {
 			mbData: mbData
 		}
 	},
+	mounted () {
+		this.getData('/dsp/getOwnerInfo', 'user')
+		this.getData('/dsp/getReportData', 'pcData', { type: 1 })
+		this.getData('/dsp/getReportData', 'mbData', { type: 2 })
+	},
 	methods: {
-		gopop: function(index) {
+		gopop: function (index) {
 			this.$router.push('/pop')
 		}
 	}

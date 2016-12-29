@@ -16,15 +16,15 @@ const router = new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/login' 
+			redirect: '/login'
 		},
 		{
 			path: '/home',
       component: home
     },
     {
-    	path: '/login',
-    	component: login
+      path: '/login',
+      component: login
     },
     {
 			path: '/user',
@@ -41,7 +41,18 @@ const router = new VueRouter({
 	]
 })
 Vue.prototype.baseUrl = 'http://wx.test.com/';
+Vue.prototype.getData = function (url, myparam, params, clllback) {
+  this.$http.get(this.baseUrl + url, { params: params ? params : '' })
+  .then((data) => {
+    this.$set(this, myparam, data.data.result)
+    if (clllback) {
+      clllback();
+    }
+  }, (data) => {
+    console.log('留空-报错信息')
+  })
+}
 const app = new Vue({
 	router: router,
-	render: h => h(App),
+	render: h => h(App)
 }).$mount('#app')

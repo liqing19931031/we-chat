@@ -3,7 +3,7 @@
 		<img :src="require('../assets/login.png')" alt="">
 		<div class="login-form">
 			<input type="text" placeholder="账户名/手机号码" name="username" v-model='params.username'>
-			<input type="text" placeholder="密码" name="key" v-model='params.key'>
+			<input type="password" placeholder="密码" name="key" v-model='params.key'>
 			<div class="remember-me" @click='remember'>
 				<i v-bind:class="[ isremember ? 'weui-icon-circle' : 'weui-icon-success' ]" class="we-success"></i> 记住我
 			</div>
@@ -32,7 +32,13 @@
 				this.isremember = !this.isremember
 			},
 			goLogin: function() {
-				this.$router.push('/home')
+				this.$http.post(this.baseUrl + '/wechat/login', this.params)
+				.then((response)=> {
+					this.$router.push('/home')
+				})
+				.catch(function(response) {
+					console.log(this.params)
+				})
 			}
 		}
 	}

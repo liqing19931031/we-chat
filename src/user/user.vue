@@ -1,6 +1,6 @@
 <template>
 	<div class="we-contain">
-		<div class="user">
+		<div class="user" v-if="users"><!-- 由于找不到数据会报错所以在调用user时加入if判断 -->
 			<div class="header">
 				<div class="user-detail">
 					<img class="avatar" src="" alt="">
@@ -30,12 +30,14 @@
 	        </div>
 	        <div class="info-service">
 	        	<div class="weui-cell" v-for="(value, key) in users.service">
-		            <div class="weui-cell__hd"><img :src="require('../assets/icon_tabbar.png')" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		            <div class="weui-cell__hd">
+		            	<img :src="require('../assets/icon_tabbar.png')" alt="" style="width:20px;margin-right:5px;display:block">
+		            </div>
 		            <div class="weui-cell__bd">
 		                <p>{{mapping[key]}}</p>
 		            </div>
 		            <div class="weui-cell__ft">{{value}}</div>
-		        </div>
+	        	</div>
 	        </div>
 	        <div class="button-sp-area" style="margin:30px 15px 0 15px">
 	        	<a href='/login' class="weui-btn weui-btn_default">退出登录</a>
@@ -45,7 +47,7 @@
 	</div>
 </template>
 <script>
-	var mapping = {
+	const mapping = {
 		companyName: '企业名称',
 		webSite: '网站名称',
 		url: '网站地址',
@@ -53,25 +55,8 @@
 		contact: '联系方式',
 		email: '邮箱地址'
 	}
-	var users = {
-		name: '陈水扁网盟系统',
-		state: 1,
-		balance: '2000',
-		total: '2000',
-		gradding: 1,
-		info: {
-			companyName: '浙江盘石宇宙联盟',
-			webSite: 'adyun.com',
-			url: 'http://www.baidu.com',
-		},
-		service: {
-			servceName: '张大炮',
-			contact: '15757104968',
-			email: '666666666@qq.com'
-		}
-
-	}
-	let userState = ['账户未通过审核', '账户审核通过', '待审核']
+	const userState = ['账户未通过审核', '账户审核通过', '待审核']
+	let users
 	export default {
 		data () {
 			return {
@@ -79,6 +64,15 @@
 				mapping: mapping,
 				userState: userState
 			}
+		},
+		mounted () {
+			// 异步获取数据
+			this.$http.get(this.baseUrl + 'dsp/getOwnerDetail')
+			.then((data) => {
+				this.$set(this, 'users', data.data.result)
+			}, (data) => {
+				console.log('系统出错!')
+            })
 		}
 	}
 </script>
@@ -86,7 +80,7 @@
 	.user{
 		height: 100%;
 		.header{
-			background-image: url(../assets/index_bg.jpg);
+			background-image: url(../assets/user_bg.png);
 			background-size: 100% 100%;
 		  	height: 170px;
 		  	background-color: white;
