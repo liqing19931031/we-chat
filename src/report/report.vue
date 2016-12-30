@@ -41,9 +41,6 @@
 	require('echarts/lib/chart/line')
 	// 配置文件
 	const weeks = ['昨天', '最近七天', '上周', '本月', '上月']
-	let myChart
-	let state
-	let reportData
 	const allType = {
 		showNum: '展现量',
 		clickNum: '点击量',
@@ -52,22 +49,25 @@
 		costPrice: '千次展现成本',
 		clickPrice: '点击单价'
 	}
-	let option
 	export default {
+		state: 'allCost',
+		option: '',
+		props: ['nowType'],
+		myChart: '',
+		reportData: '',
 		data () {
 			return {
 				day: 0, // 时间单位
-				state: 'showNum', // 推广维度
-				option: option, // 图表数据
-				reportData: reportData, // 推广信息
-				type: 2,
+				state: this.state || 'allCost', // 推广维度
+				option: this.option, // 图表数据
+				reportData: this.reportData, // 推广信息
 				weeks: weeks,
 				allType: allType,
-				myChart: myChart
+				myChart: this.myChart
 			}
 		},
 		mounted () {
-			myChart = echarts.init(document.getElementById('myChart'))
+			this.myChart = echarts.init(document.getElementById('myChart'))
 			this.getReport()
 			this.getLineData()
 		},
@@ -75,24 +75,24 @@
 			getReport: function () {
 				this.getData('dsp/getReportData', 'reportData', {
 					day: this.day,
-					type: this.type
+					type: this.$route.params.type
 				})
 			},
 			getLineData: function () {
 				this.getData('/dsp/lineChart', 'option', {
-					type: this.type,
+					type: this.$route.params.type,
 					day: this.day,
 					state: this.state
 				}, this.setOptions)
 			},
-			setOptions: function(data) {
-				let x = [];
-				let y = [];
-				this.option.forEach(function(item, index){
+			setOptions: function (data) {
+				let x = []
+				let y = []
+				this.option.forEach(function (item, index) {
 					x.push(item.xAxis)
 					y.push(item.yAxis)
 				})
-				myChart.setOption({
+				this.myChart.setOption({
 					title: {},
 					tooltip: {},
 					xAxis: {

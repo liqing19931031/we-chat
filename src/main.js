@@ -35,18 +35,18 @@ const router = new VueRouter({
       component: pop
     },
     {
-      path: '/report',
+      path: '/report/:type',
       component: report
     }
 	]
 })
-Vue.prototype.baseUrl = 'http://wx.test.com/';
+Vue.prototype.baseUrl = 'http://wx.test.com/'
 Vue.prototype.getData = function (url, myparam, params, clllback) {
   this.$http.get(this.baseUrl + url, { params: params ? params : '' })
   .then((data) => {
     this.$set(this, myparam, data.data.result)
     if (clllback) {
-      clllback();
+      clllback()
     }
   }, (data) => {
     console.log('留空-报错信息')

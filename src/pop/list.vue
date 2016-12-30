@@ -1,16 +1,20 @@
 <template>
-	<a class="weui-cell weui-cell_access" href="">
+	<a class="weui-cell weui-cell_access" v-on:click='selectDetail(list.id)'>
         <div class="weui-cell__bd">
-            <p>{{dataList.name}}</p>
+    		<p>
+    			<div class="list-name">{{list.name}}</div>
+    			<div class="point" :class="colors[list.state]"></div>
+    			<div class="clearBoth"></div>
+    		</p>
             <div class="weui-flex nopadding">
 	            <div class="weui-flex__item">
-	            	<div class="placeholder">花费 ￥{{dataList.cost}}</div>
+	            	<div class="placeholder">花费 {{list.cost}}</div>
 	            </div>
 	            <div class="weui-flex__item">
-	            	<div class="placeholder">展现 {{dataList.showNum}}</div>
+	            	<div class="placeholder">展现 {{list.showNum}}</div>
 	            </div>
 	            <div class="weui-flex__item">
-	            	<div class="placeholder">点击 {{dataList.clickNum}}</div>
+	            	<div class="placeholder">点击 {{list.clickNum}}</div>
 	            </div>
 	        </div>
         </div>
@@ -20,14 +24,16 @@
 </template>
 <script>
 	export default {
-		props: ['dataList'],
+		props: ['list', 'colors'],
 		data () {
 			return {
-				a: 'aaa'
+				a: 'aa'
 			}
 		},
 		methods: {
-
+			selectDetail: function (myId) {
+				this.$emit('selectDetail', myId)
+			}
 		}
 	}
 </script>
@@ -36,6 +42,7 @@
 		p{
 			font-size: 16px;
 			color: #333333;
+			width: 100%;
 		}
 		.weui-flex{
 			.weui-flex__item{
@@ -49,5 +56,18 @@
 				}
 			}
 		}
-	}
+		.list-name{
+			float: left;
+		}
+		.point{
+			position: relative;
+			left: 5px;
+			top: 5px; 
+			float: left;
+			height: 9px;
+			display: block;
+			border-radius: 50%;
+			width: 9px;
+		}
+}
 </style>

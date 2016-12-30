@@ -7,33 +7,31 @@
         <a class="weui-tabbar__item">
           <router-link to="/home">
             <span style="display: inline-block;position: relative;">
-                <img :src="require('./assets/icon_tabbar.png')" alt="" class="weui-tabbar__icon">
+                <img :src="$root.$route.fullPath === '/home' ? require('./assets/Navbar_icon/select_home.png') : require('./assets/Navbar_icon/normal_home.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">首页</p>
           </router-link>
         </a>
         <a class="weui-tabbar__item">
           <router-link to="/pop">
-            <img :src="require('./assets/icon_tabbar.png')" alt="" class="weui-tabbar__icon">
+            <img :src="$root.$route.fullPath === '/pop' ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推广</p>
           </router-link>
         </a>
-        <a class="weui-tabbar__item">
-          <div class="weui-actionsheet__menu" v-if="showNav">
-              <div class="weui-actionsheet__cell"><a link-to>全景推广报告</a></div>
-              <div class="weui-actionsheet__cell"><a link-to>网盟推广报告</a></div>
-              <div class="weui-actionsheet__cell"><a link-to>移动推广报告</a></div>
-          </div>
-          <router-link to="/report">
+        <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/report') ? 'router-link-active' : ''">
+            <div class="weui-actionsheet__menu" v-if="showNav">
+                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/1'>全景推广报告</router-link></div>
+                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/2'>网盟推广报告</router-link></div>
+                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/3'>移动推广报告</router-link></div>
+            </div>
             <span style="display: inline-block;position: relative;" @click='shownav'>
-                <img :src="require('./assets/icon_tabbar.png')" alt="" class="weui-tabbar__icon">
+                <img :src="!$root.$route.fullPath.indexOf('/report') ? require('./assets/Navbar_icon/select_report.png') : require('./assets/Navbar_icon/normal_report.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">报告</p>
-          </router-link>
         </a>
         <a class="weui-tabbar__item">
           <router-link to="/user">
-            <img :src="require('./assets/icon_tabbar.png')" alt="" class="weui-tabbar__icon">
+            <img :src="$root.$route.fullPath === '/user' ? require('./assets/Navbar_icon/select_account.png') : require('./assets/Navbar_icon/normal_account.png')" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">账户</p>
           </router-link>
         </a>
@@ -46,7 +44,6 @@ export default {
   name: 'app',
   data () {
     return {
-      isdoc: this.meta === 1 ? false : true,
       showNav: false,
       transitionName: 'slide-left'
     }
@@ -54,7 +51,7 @@ export default {
   components: {
   },
   methods: {
-    shownav: function(){
+    shownav: function () {
       this.showNav = !this.showNav
     }
   }
@@ -85,7 +82,7 @@ body{
 }
 .router-link-active{
   .weui-tabbar__label{
-    color: #09BB07;
+    color: #4e8df5;
   }
 }
 .themeColor{
@@ -119,6 +116,9 @@ body{
     padding: 10px 0;
     margin: 0 10px;
     font-size: 12px;
+    a{
+      color: #999999;
+    }
   }
 }
 .page {

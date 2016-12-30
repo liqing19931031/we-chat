@@ -1,6 +1,6 @@
 <template>
 	<div class="page navbar js_show pop">
-	    <div class="page__bd" style="height: 100%;">
+	    <div class="page__bd" style="height: 100%;" v-if="details === ''">
 	        <div class="weui-tab">
 	            <div class="weui-navbar">
 	                <div class="weui-navbar__item" 
@@ -19,48 +19,78 @@
 	                    推广创意
 	                </div>
 	            </div>
-	            <div class="weui-tab__panel">
+	            <div class="weui-tab__panel" v-if='dataList'>
             		<div class="we-list" v-for="(item, index) in dataList">
-	            		<list :dataList="item"></list>
+	            		<list 	:list="item" 
+	            				:colors="colors"
+	            				v-on:selectDetail="changeDetail"></list>
 	            	</div>
 	            </div>
 	        </div>
 	    </div>
+		<detail v-else :details="details"
+    		:colors="colors">
+    	</detail>	    	
 	</div>
 </template>
 <script>
-let dataList = [];
-for (let a = 1; a < 10 ; a ++ ) {
-	let object = {
-		id: a,
-		name: '计划' + a,
-		cost: a + '000',
-		showNum: a + '00',
-		clickNum: a + '0000',
-		state: parseInt(a%3, 10)
-	}
-	dataList.push(object)
-}
 import list from './list.vue'
+import detail from './detail.vue'
 export default {
 	data () {
 		return {
 			nowList: 1,
-			dataList: dataList
+			dataList: '',
+			details: '',
+			colors: [
+				'',
+				'success',
+				'warning',
+				'stop',
+				'error'
+			]
 		}
 	},
 	components: {
-		list: list
+		list: list,
+		detail: detail
 	},
 	methods: {
-		changeList: function(item){
-			console.log(item);
-			this.nowList = item;
+		changeList: function (item) {
+			this.nowList = item
+			this.getList()
+		},
+		getList: function () {
+			this.getData('dsp/getDataList', 'dataList', { type: this.nowList, popType: this.$route.params.popType || 1 })
+		},
+		getDetail: function (myId) {
+			this.getData('/dsp/getDataDetail', 'details', { type: this.nowList, id: myId })
+		},
+		changeDetail: function (myId) {
+			this.getDetail(myId)
 		}
+	},
+	mounted () {
+		this.getList()
 	}
 }
 </script>
 <style lang='less'>
+	.page{
+		height: 100%;
+	}
+	.success{
+		background-color: #09bb07;
+	}
+	.warning{
+		background-color: #ffbe00;
+	}
+	.stop{
+		background-color: #cccccc;
+	}
+	.error{
+		background-color: red;
+	}
 	.weui-bar__item_on{
 		background-color: #4e8df5!important;
 		color: white;
