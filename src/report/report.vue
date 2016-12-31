@@ -66,6 +66,11 @@
 				myChart: this.myChart
 			}
 		},
+		watch: {
+			'$route' (to, from) {
+				this.getReport()
+			}
+		},
 		mounted () {
 			this.myChart = echarts.init(document.getElementById('myChart'))
 			this.getReport()
@@ -78,14 +83,14 @@
 					type: this.$route.params.type
 				})
 			},
-			getLineData: function () {
+			getLineData: function () { // 图表方法
 				this.getData('/dsp/lineChart', 'option', {
 					type: this.$route.params.type,
 					day: this.day,
 					state: this.state
 				}, this.setOptions)
 			},
-			setOptions: function (data) {
+			setOptions: function (data) { // 设置Echarts
 				let x = []
 				let y = []
 				this.option.forEach(function (item, index) {

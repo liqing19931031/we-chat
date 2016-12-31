@@ -12,19 +12,21 @@
             <p class="weui-tabbar__label">首页</p>
           </router-link>
         </a>
-        <a class="weui-tabbar__item">
-          <router-link to="/pop">
-            <img :src="$root.$route.fullPath === '/pop' ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">推广</p>
-          </router-link>
-        </a>
-        <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/report') ? 'router-link-active' : ''">
-            <div class="weui-actionsheet__menu" v-if="showNav">
-                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/1'>全景推广报告</router-link></div>
-                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/2'>网盟推广报告</router-link></div>
-                <div class="weui-actionsheet__cell" @click='shownav'><router-link to='/report/3'>移动推广报告</router-link></div>
+        <a class="weui-tabbar__item" @click='shownav(1)'>
+            <div class="weui-actionsheet__menu" v-if="showPop">
+                <div class="weui-actionsheet__cell"><router-link to='/pop/1'>网盟推广</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/pop/2'>移动推广</router-link></div>
             </div>
-            <span style="display: inline-block;position: relative;" @click='shownav'>
+            <img :src="!$root.$route.fullPath.indexOf('/pop') ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">推广</p>
+        </a>
+        <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/report') ? 'router-link-active' : ''" @click='shownav'>
+            <div class="weui-actionsheet__menu" v-if="showNav">
+                <div class="weui-actionsheet__cell"><router-link to='/report/1'>全景推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/report/2'>网盟推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/report/3'>移动推广报告</router-link></div>
+            </div>
+            <span style="display: inline-block;position: relative;">
                 <img :src="!$root.$route.fullPath.indexOf('/report') ? require('./assets/Navbar_icon/select_report.png') : require('./assets/Navbar_icon/normal_report.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">报告</p>
@@ -45,14 +47,21 @@ export default {
   data () {
     return {
       showNav: false,
+      showPop: false,
       transitionName: 'slide-left'
     }
   },
   components: {
   },
   methods: {
-    shownav: function () {
-      this.showNav = !this.showNav
+    shownav: function (index) {
+      if (index === 1) {
+        this.showPop = !this.showPop
+        this.showNav = false
+      } else {
+        this.showNav = !this.showNav
+        this.showPop = false
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
 					<div class="user-name">
 						<div>{{users.name}}</div>
 						<div class="user-level">
-							<img :src="require('../assets/loginbg.png')" alt="">
+							<img :src="vip[users.grading]" alt="">
 							<div class="user-state" v-bind:class="'bg' + users.state">
 								{{this.userState[users.state]}}
 							</div>
@@ -21,7 +21,7 @@
 			</div>
 	        <div class="info-service">
 	        	<div class="weui-cell" v-for="(value, key) in users.info">
-		            <div class="weui-cell__hd"><img :src="require('../assets/icon_tabbar.png')" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		            <div class="weui-cell__hd"><img :src="images[key]" alt="" style="width:20px;margin-right:5px;display:block"></div>
 		            <div class="weui-cell__bd">
 		                <p>{{mapping[key]}}</p>
 		            </div>
@@ -31,7 +31,7 @@
 	        <div class="info-service">
 	        	<div class="weui-cell" v-for="(value, key) in users.service">
 		            <div class="weui-cell__hd">
-		            	<img :src="require('../assets/icon_tabbar.png')" alt="" style="width:20px;margin-right:5px;display:block">
+		            	<img :src="images[key]" alt="" style="width:20px;margin-right:5px;display:block">
 		            </div>
 		            <div class="weui-cell__bd">
 		                <p>{{mapping[key]}}</p>
@@ -48,18 +48,34 @@
 </template>
 <script>
 	const mapping = {
-		companyName: '企业名称',
-		webSite: '网站名称',
-		url: '网站地址',
-		servceName: '服务顾问',
-		contact: '联系方式',
-		email: '邮箱地址'
+		company: '企业名称',
+		siteName: '网站名称',
+		domain: '网站地址',
+		serviceName: '服务顾问',
+		servicePhone: '联系方式',
+		serviceMail: '邮箱地址'
 	}
 	const userState = ['账户未通过审核', '账户审核通过', '待审核']
 	let users
 	export default {
 		data () {
 			return {
+				mappding: {
+					company: '企业名称',
+					siteName: '网站名称',
+					domain: '网站地址',
+					serviceName: '服务顾问',
+					servicePhone: '联系方式',
+					serviceMail: '邮箱地址'
+				},
+				images: {
+					company: require('../assets/comName@3x.png'),
+					siteName: require('../assets/pc@3x.png'),
+					domain: require('../assets/pc@3x.png'),
+					serviceName: require('../assets/servise@3x.png'),
+					servicePhone: require('../assets/contact@3x.png'),
+					serviceMail: require('../assets/email@3x.png')
+				},
 				users: users,
 				mapping: mapping,
 				userState: userState
@@ -111,12 +127,12 @@
 				  		.user-state{
 				  			float: left;
 							border-radius: 6px;
-							height: 18px;
+							height: 14px;
 							color: white;
-							line-height: 16px;
+							line-height: 14px;
 							margin-left: 10px;
 							font-weight: normal;
-							font-size: 16px;
+							font-size: 14px;
 							padding: 2px 10px;
 							&.bg0{
 								background-color: #f82f30;
@@ -134,7 +150,19 @@
 		  	.weui-flex{
 		  		width: 100%;
 		  		position: absolute;
+		  		height: 2.3em;
 				bottom: 0;
+				&.page{
+					.weui-flex__item{
+						.placeholder{
+							height: 100%;
+							line-height: 2.6em;
+						}
+					}
+					.weui-flex__item + .weui-flex__item{
+						border-left: 1px solid black;
+					}
+				}
 		  	}
 		}
 		.info-service{

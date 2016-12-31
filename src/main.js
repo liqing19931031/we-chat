@@ -31,7 +31,7 @@ const router = new VueRouter({
       component: user
     },
     {
-      path: '/pop',
+      path: '/pop/:type',
       component: pop
     },
     {
@@ -41,6 +41,13 @@ const router = new VueRouter({
 	]
 })
 Vue.prototype.baseUrl = 'http://wx.test.com/'
+Vue.prototype.vip = [
+  '',
+  require('./assets/vip1.png'),
+  require('./assets/vip2.png'),
+  require('./assets/vip3.png'),
+  require('./assets/vip4.png')
+]
 Vue.prototype.getData = function (url, myparam, params, clllback) {
   this.$http.get(this.baseUrl + url, { params: params ? params : '' })
   .then((data) => {

@@ -1,5 +1,5 @@
 <template>
-	<div class="page navbar js_show pop">
+	<div class="page navbar js_show">
 	    <div class="page__bd" style="height: 100%;" v-if="details === ''">
 	        <div class="weui-tab">
 	            <div class="weui-navbar">
@@ -51,6 +51,11 @@ export default {
 			]
 		}
 	},
+	watch: {
+		'$route' (to, from) {
+			this.getList()
+		}
+	},
 	components: {
 		list: list,
 		detail: detail
@@ -61,7 +66,7 @@ export default {
 			this.getList()
 		},
 		getList: function () {
-			this.getData('dsp/getDataList', 'dataList', { type: this.nowList, popType: this.$route.params.popType || 1 })
+			this.getData('dsp/getDataList', 'dataList', { type: this.nowList, popType: this.$route.params.type || 1 })
 		},
 		getDetail: function (myId) {
 			this.getData('/dsp/getDataDetail', 'details', { type: this.nowList, id: myId })

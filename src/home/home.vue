@@ -8,7 +8,7 @@
 		            </div>
 		        </div>
 		        <div style="text-align:center">
-		        	<img :src="require('../assets/loginbg.png')" alt="">
+		        	<img :src="vip[user.grading]" alt="">
 		        </div>
 		        <div class="weui-flex common-bottom">
 		        	<div class="weui-flex__item">
