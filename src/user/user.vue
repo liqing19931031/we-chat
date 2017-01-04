@@ -3,7 +3,7 @@
 		<div class="user" v-if="users"><!-- 由于找不到数据会报错所以在调用user时加入if判断 -->
 			<div class="header">
 				<div class="user-detail">
-					<img class="avatar" src="" alt="">
+					<img class="avatar" :src="require('../assets/avatar.png')" alt="">
 					<div class="user-name">
 						<div>{{users.name}}</div>
 						<div class="user-level">
@@ -71,7 +71,7 @@
 				images: {
 					company: require('../assets/comName@3x.png'),
 					siteName: require('../assets/pc@3x.png'),
-					domain: require('../assets/pc@3x.png'),
+					domain: require('../assets/address@3x.png'),
 					serviceName: require('../assets/servise@3x.png'),
 					servicePhone: require('../assets/contact@3x.png'),
 					serviceMail: require('../assets/email@3x.png')

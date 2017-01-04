@@ -8,31 +8,49 @@
 		      		<div class="clearBoth"></div>
 		    	</div>
 		  	</div>
+		  	<div class="weui-cell" v-if="details.unit">
+	            <div class="weui-cell__bd">
+	                <p>所属单元</p>
+	            </div>
+	            <div class="weui-cell__ft">{{details.unit.name}}</div>
+	        </div>
+		  	<div class="weui-cell" v-if="details.plan">
+	            <div class="weui-cell__bd">
+	                <p>所属计划</p>
+	            </div>
+	            <div class="weui-cell__ft">{{details.plan.name}}</div>
+	        </div>
 		  	<div class="weui-cell" v-if="details.popType">
 	            <div class="weui-cell__bd">
 	                <p>推广类型</p>
 	            </div>
 	            <div class="weui-cell__ft">{{details.popType === 1? '网盟推广' : '移动推广'}}</div>
 	        </div>
-	        <a class="weui-cell weui-cell_access" href="javascript:;" v-if="details.unitNum">
+	        <router-link class="weui-cell weui-cell_access" :to="{ path: './list', query: { planId: details.id}}" v-if="details.unitNum">
 	            <div class="weui-cell__bd">
 	                <p>下属单元</p>
 	            </div>
 	            <div class="weui-cell__ft">{{details.unitNum}}个</div>
-	        </a>
-	        <a class="weui-cell weui-cell_access" href="javascript:;" v-if="details.unitNum">
+	        </router-link>
+	        <router-link class="weui-cell weui-cell_access" :to="{ path: './list', query: { unitId: details.id}}" v-if="details.ideaNum">
 	            <div class="weui-cell__bd">
-	                <p>下属单元</p>
+	                <p>下属创意</p>
 	            </div>
-	            <div class="weui-cell__ft">{{details.unitNum}}个</div>
-	        </a>
+	            <div class="weui-cell__ft">{{details.ideaNum}}个</div>
+	        </router-link>
 		</div>
 		<div class="we-cell" style="margin-bottom: 10px">
 			<div class="weui-cell" v-if="details.budget">
 	            <div class="weui-cell__bd">
-	                <p>推广类型</p>
+	                <p>日预算</p>
 	            </div>
 	            <div class="weui-cell__ft">￥{{details.budget}}</div>
+	        </div>
+	        <div class="weui-cell" v-if="details.price">
+	            <div class="weui-cell__bd">
+	                <p>出价</p>
+	            </div>
+	            <div class="weui-cell__ft">￥{{details.price}}</div>
 	        </div>
 	        <div class="weui-cell" v-if="details.sdate">
 	            <div class="weui-cell__bd">
@@ -46,6 +64,24 @@
 	            </div>
 	            <div class="weui-cell__ft">{{details.edate}}</div>
 	        </div>
+	        <div class="weui-cell" v-if="details.ideatype">
+	            <div class="weui-cell__bd">
+	                <p>创意类型</p>
+	            </div>
+	            <div class="weui-cell__ft">{{details.ideatype}}</div>
+	        </div>
+	        <div class="weui-cell" v-if="details.size">
+	            <div class="weui-cell__bd">
+	                <p>创意尺寸</p>
+	            </div>
+	            <div class="weui-cell__ft">{{details.size}}</div>
+	        </div>
+	        <a class="weui-cell weui-cell_access" :href="details.clickLink" v-if="details.clickLink">
+	            <div class="weui-cell__bd">
+	                <p>创意链接</p>
+	            </div>
+	            <div class="weui-cell__ft">{{details.showLink}}</div>
+	        </a>
 		</div>
 		<div class="we-cell">
 			<div class="weui-cell" v-if="details.showNum">
@@ -83,7 +119,6 @@
 </template>
 <script>
 export default {
-	props: ['details', 'colors'],
 	data () {
 		return {
 			stats: [
@@ -94,8 +129,19 @@ export default {
 				'审核中',
 				'审核拒绝',
 				'删除'
-			]
+			],
+			colors: [
+				'',
+				'success',
+				'warning',
+				'stop',
+				'error'
+			],
+			details: ''
 		}
+	},
+	mounted () {
+		this.getData('/dsp/getDataDetail', 'details', { type: this.$route.query.nowList, id: this.$route.query.id })
 	}
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<a class="weui-cell weui-cell_access" v-on:click='selectDetail(list.id)'>
+	<router-link :to="{ path: './detail', query: {id: list.id, nowList: nowList}}" class="weui-cell weui-cell_access">
         <div class="weui-cell__bd">
     		<p>
     			<div class="list-name">{{list.name}}</div>
@@ -20,22 +20,17 @@
         </div>
         <div class="weui-cell__ft">
         </div>
-    </a>
+    </router-link>
 </template>
 <script>
-	export default {
-		props: ['list', 'colors'],
-		data () {
-			return {
-				a: 'aa'
-			}
-		},
-		methods: {
-			selectDetail: function (myId) {
-				this.$emit('selectDetail', myId)
-			}
+export default {
+	props: ['list', 'nowList'],
+	data () {
+		return {
+			a: 'aa'
 		}
 	}
+}
 </script>
 <style scoped lang='less'>
 	.weui-cell__bd{

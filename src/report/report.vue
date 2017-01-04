@@ -30,6 +30,7 @@
 							<span>{{item}}</span>
 						</div>
 					</div>
+					<div class="clearBoth"></div>
 				</div>
 			</div>
 		</div>
@@ -135,7 +136,9 @@
 	}
 	.weui-bar__item_in{
 		border-bottom: 2px solid #4e8df5;
-		color: #4e8df5;
+		span{
+			color: #4e8df5!important;
+		}
 	}
 	.typeBtn{
 		background-color: white;
@@ -154,8 +157,10 @@
 					display: block;
 					height: 20px;
 					line-height: 20px;
+					color: #333333;
 				}
 				span:nth-child(1) {
+					color: #666666;
 					padding-top: 20px;
 				}
 			}

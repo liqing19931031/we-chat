@@ -1,45 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import home from './home/home.vue'
-import login from './login/login.vue'
-import user from './user/user.vue'
-import pop from './pop/pop.vue'
-import report from './report/report.vue'
-Vue.use(VueRouter)
+import Router from './router.js'
 Vue.use(VueResource)
-
-const router = new VueRouter({
-	mode: 'history',
-	base: __dirname,
-	routes: [
-		{
-			path: '/',
-			redirect: '/login'
-		},
-		{
-			path: '/home',
-      component: home
-    },
-    {
-      path: '/login',
-      component: login
-    },
-    {
-			path: '/user',
-      component: user
-    },
-    {
-      path: '/pop/:type',
-      component: pop
-    },
-    {
-      path: '/report/:type',
-      component: report
-    }
-	]
-})
+// 全局常量
 Vue.prototype.baseUrl = 'http://wx.test.com/'
 Vue.prototype.vip = [
   '',
@@ -48,6 +12,14 @@ Vue.prototype.vip = [
   require('./assets/vip3.png'),
   require('./assets/vip4.png')
 ]
+Vue.prototype.colors = [
+        '',
+        'success',
+        'warning',
+        'stop',
+        'error'
+      ]
+// 对原异步请求方式进行再封装
 Vue.prototype.getData = function (url, myparam, params, clllback) {
   this.$http.get(this.baseUrl + url, { params: params ? params : '' })
   .then((data) => {
@@ -60,6 +32,6 @@ Vue.prototype.getData = function (url, myparam, params, clllback) {
   })
 }
 const app = new Vue({
-	router: router,
+	router: Router,
 	render: h => h(App)
 }).$mount('#app')
