@@ -95,6 +95,9 @@
 <style lang='less'>
 	.user{
 		height: 100%;
+		.weui-btn_default{
+			background-color: white;
+		}
 		.header{
 			background-image: url(../assets/user_bg.png);
 			background-size: 100% 100%;
@@ -160,7 +163,7 @@
 						}
 					}
 					.weui-flex__item + .weui-flex__item{
-						border-left: 1px solid black;
+						border-left: 1px solid #333333;
 					}
 				}
 		  	}

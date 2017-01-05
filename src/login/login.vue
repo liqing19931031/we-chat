@@ -32,9 +32,14 @@
 				this.isremember = !this.isremember
 			},
 			goLogin: function() {
-				this.$http.post(this.baseUrl + '/wechat/login', this.params)
+				this.$router.push('/home')
+				this.$http.post(this.baseUrl + 'wechat/login', this.params)
 				.then((response)=> {
-					this.$router.push('/home')
+					if (response.data.code === 1) {
+						this.$router.push('/home')
+					} else {
+						console.log(response.data.msg)
+					}
 				})
 				.catch(function(response) {
 					console.log(this.params)

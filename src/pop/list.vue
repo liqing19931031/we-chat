@@ -6,6 +6,11 @@
     			<div class="point" :class="colors[list.state]"></div>
     			<div class="clearBoth"></div>
     		</p>
+    		<!-- <p v-if="list.oriContent">
+    			<div class="list-name">{{list.oriContent.type}}:&nbsp&nbsp</div>
+    			<div class="list-name">{{list.oriContent.size}}</div>
+    			<div class="clearBoth"></div>
+    		</p> -->
             <div class="weui-flex nopadding">
 	            <div class="weui-flex__item">
 	            	<div class="placeholder">花费 {{list.cost}}</div>

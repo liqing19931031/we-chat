@@ -17,7 +17,7 @@
 	            推广创意
 	        </div>
 	    </div>
-	    <div class="weui-tab__panel" v-if='dataList'>
+	    <div id="my-list" class="weui-tab__panel">
 			<div class="we-list" v-for="(item, index) in dataList">
 	    		<list 	:list="item" 
 	    				:colors="colors"
@@ -35,40 +35,16 @@ export default {
 			nowList: 1,
 			dataList: '',
 			details: '',
-			page: 1,
-			scrolled: false
+			page: 1
 		}
 	},
 	watch: {
-		'$route' () {
-			this.getList()
-		}
-	},
-	components: {
-		list: list
-	},
-	methods: {
-		changeList: function (item) {
-			this.nowList = item
-			let myParams = {}
-			if (this.$route.query.unitId) {
-				myParams = { 'unitId': this.$route.query.unitId }
-			} else {
-				if (this.$route.query.planId) {
-					myParams = { 'planId': this.$route.query.planId }
-				}
-			}
-			this.getList(myParams)
-		},
-		getList: function (myParams) {
-			myParams = Object.assign(myParams, { page: this.page })
-			myParams = Object.assign(myParams, { type: this.nowList })
-			myParams = Object.assign(myParams, { pageItems: 10 })
-			myParams = Object.assign(myParams, { popType: this.$route.params.type || 1 })
-			this.getData('dsp/getDataList', 'dataList', myParams)
+		'$route' (to, from) {
+			this.getList(this.getParams())
 		}
 	},
 	mounted () {
+		document.getElementById('my-list').addEventListener('scroll', this.bindScroll)
 		let myParams = {}
 		if (this.$route.query.unitId) {
 			this.nowList = 3
@@ -82,6 +58,42 @@ export default {
 			}
 		}
 		this.getList(myParams)
+	},
+	components: {
+		list: list
+	},
+	methods: {
+		changeList (item) {
+			this.nowList = item
+			this.page = 1
+			this.getList(this.getParams())
+		},
+		getParams () {
+			let myParams = {}
+			if (this.$route.query.unitId) {
+				myParams = { 'unitId': this.$route.query.unitId }
+			} else {
+				if (this.$route.query.planId) {
+					myParams = { 'planId': this.$route.query.planId }
+				}
+			}
+			return myParams
+		},
+		bindScroll () {
+			let $myList = document.getElementById('my-list')
+			let allHeight = $myList.clientHeight
+			if ((allHeight + $myList.scrollTop) >= ($myList.scrollHeight - 1)) {
+				this.page = this.page + 1
+				this.getList (this.getParams(), 1)
+			}
+		},
+		getList (myParams, myFun) {
+			myParams = Object.assign(myParams, { page: this.page })
+			myParams = Object.assign(myParams, { type: this.nowList })
+			myParams = Object.assign(myParams, { pageItems: 10 })
+			myParams = Object.assign(myParams, { popType: this.$route.params.type || 1 })
+			this.getData('dsp/getDataList', 'dataList', myParams, myFun || '')
+		}
 	}
 }
 </script>

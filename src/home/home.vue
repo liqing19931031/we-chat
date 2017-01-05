@@ -64,10 +64,10 @@
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
-	                <a class="weui-cell weui-cell_access weui-cell_link" @click='gopop(1)'>
+	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/pop/1'>
 	                    <div class="weui-cell__bd">查看详情</div>
 	                    <span class="weui-cell__ft"></span>
-	                </a>
+	                </router-link>
 	            </div>
 	        </div>
 	        <div class="weui-content" v-if="mbData">
@@ -109,10 +109,10 @@
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
-	                <a class="weui-cell weui-cell_access weui-cell_link" @click='gopop(2)'>
+	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/pop/2'>
 	                    <div class="weui-cell__bd">查看详情</div>
 	                    <span class="weui-cell__ft"></span>
-	                </a>
+	                </router-link>
 	            </div>
 	        </div>
 	        <div class="white-block"></div>
@@ -153,12 +153,16 @@ export default {
 			img{
 				width: 65px;
 				height: 18px;
+				padding: 10px 0;
 			}
 		}
 		.weui-panel__ft{
 			background-color: white;
 			a{
 				color: #666666;
+			}
+			.weui-cell__bd{
+				color: #4e8df5;
 			}
 			.we-content{
 				width: 100%;
