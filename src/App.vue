@@ -14,8 +14,8 @@
         </a>
         <a class="weui-tabbar__item" @click='shownav(1)'>
             <div class="weui-actionsheet__menu" v-if="showPop">
-                <div class="weui-actionsheet__cell"><router-link to='/pop/1'>网盟推广</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/pop/2'>移动推广</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/pop/1'>网盟推广活动</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/pop/2'>移动推广活动</router-link></div>
             </div>
             <img :src="!$root.$route.fullPath.indexOf('/pop') ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推广</p>
@@ -50,8 +50,6 @@ export default {
       showPop: false,
       transitionName: 'slide-left'
     }
-  },
-  components: {
   },
   methods: {
     shownav (index) {

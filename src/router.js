@@ -8,6 +8,35 @@ import detail from './pop/detail.vue'
 import lists from './pop/lists.vue'
 import report from './report/report.vue'
 
+let weixinTile = function(title) {
+	let $body = document.body;
+	document.title = title;
+	var $iframe = createDom('<iframe src="/favicon.ico"></iframe>');
+    $iframe.addEventListener('load', load);
+    $body.appendChild($iframe);
+    function load(){
+        setTimeout(function() {
+            $iframe.removeEventListener('load', load);
+            $body.removeChild($iframe);
+        }, 0);
+    }
+
+    function createDom(htmlStr){
+        var tmp = document.createElement('div');
+        tmp.innerHTML = htmlStr;
+        var children = tmp.childNodes;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].nodeType ===1 ) {
+                return children[i];
+            }
+        }
+        return;
+    }
+}
+const myArray = {
+	report: ['', '全景', '网盟', '移动'],
+	pop: ['', '网盟', '移动']
+}
 Vue.use(VueRouter)
 const router = new VueRouter({
 	mode: 'history',
@@ -41,27 +70,35 @@ const router = new VueRouter({
 		      		redirect: 'list'
 	      		},
 	        	{
-		          path: 'detail',
-		          component: detail,
-		          name: '推广详情'
+		          	path: 'detail',
+		          	component: detail,
+		          	name: '推广详情'
 		        },
 		        {
-		          path: 'list',
-		          component: lists,
-		          name: '推广列表'
+		          	path: 'list',
+		          	component: lists,
+		          	name: '推广列表'
 		        }
 	      	]
 	    },
 	    {
 	      path: '/report/:type',
 	      component: report,
-	      name: '报告中心'
+	      name: '推广报告'
 	    }
 	]
 })
-
 router.afterEach((to, from, next) => {
-  document.title = to.name
+	let myName
+	myName = to.name
+	if (to.params.type) {
+		if (to.path.indexOf('report') > 0) {
+			myName = myArray.report[to.params.type] + myName
+		} else {
+			myName = myArray.pop[to.params.type] + myName
+		}
+	}
+  	weixinTile(myName)
 })
 
 export default router

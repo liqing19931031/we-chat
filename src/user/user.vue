@@ -135,7 +135,7 @@
 							line-height: 14px;
 							margin-left: 10px;
 							font-weight: normal;
-							font-size: 14px;
+							font-size: 10px;
 							padding: 2px 10px;
 							&.bg0{
 								background-color: #f82f30;

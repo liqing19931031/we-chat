@@ -25,17 +25,20 @@
 	    	</div>
 	    	<div class="white-block"></div>
 	    </div>
+	    <loadding v-if='this.isloadding'></loadding>
 	</div>
 </template>
 <script>
 import list from './list.vue'
+import loadding from '../component/loadding.vue'
 export default {
 	data () {
 		return {
 			nowList: 1,
 			dataList: '',
 			details: '',
-			page: 1
+			page: 1,
+			isloadding: false
 		}
 	},
 	watch: {
@@ -60,7 +63,8 @@ export default {
 		this.getList(myParams)
 	},
 	components: {
-		list: list
+		list: list,
+		loadding: loadding
 	},
 	methods: {
 		changeList (item) {
@@ -77,14 +81,16 @@ export default {
 					myParams = { 'planId': this.$route.query.planId }
 				}
 			}
+			this.isloadding = true
 			return myParams
 		},
 		bindScroll () {
-			let $myList = document.getElementById('my-list')
-			let allHeight = $myList.clientHeight
+			const $myList = document.getElementById('my-list')
+			const allHeight = $myList.clientHeight
 			if ((allHeight + $myList.scrollTop) >= ($myList.scrollHeight - 1)) {
+				console.log(this)
 				this.page = this.page + 1
-				this.getList (this.getParams(), 1)
+				this.getList(this.getParams(), 1)
 			}
 		},
 		getList (myParams, myFun) {

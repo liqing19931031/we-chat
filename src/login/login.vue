@@ -17,36 +17,39 @@
 	</div>
 </template>
 <script>
-	export default {
-		data () {
-			return {
-				isremember: true,
-				params: {
-					username: '',
-					key: ''
-				}
-			}
-		},
-		methods: {
-			remember: function() {
-				this.isremember = !this.isremember
-			},
-			goLogin: function() {
-				this.$router.push('/home')
-				this.$http.post(this.baseUrl + 'wechat/login', this.params)
-				.then((response)=> {
-					if (response.data.code === 1) {
-						this.$router.push('/home')
-					} else {
-						console.log(response.data.msg)
-					}
-				})
-				.catch(function(response) {
-					console.log(this.params)
-				})
+export default {
+	data () {
+		return {
+			alert: false,
+			isremember: true,
+			params: {
+				username: '',
+				key: ''
 			}
 		}
+	},
+	methods: {
+		remember () {
+			this.isremember = !this.isremember
+		},
+		showAlert (msg) {
+			this.$dialog(msg)
+		},
+		goLogin () {
+			this.$http.post(this.baseUrl + 'wechat/login', this.params)
+			.then((response)=> {
+				if (response.data.code === 1) {
+					this.$router.push('/home')
+				} else {
+					showAlert(response.data.msg)
+				}
+			})
+			.catch((response)=> {
+				this.showAlert('网络出错!')
+			})
+		}
 	}
+}
 </script>
 <style lang="less">
 	.login{

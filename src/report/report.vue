@@ -94,6 +94,7 @@
 			setOptions: function (data) { // 设置Echarts
 				let x = []
 				let y = []
+				let that = this;
 				this.option.forEach(function (item, index) {
 					x.push(item.xAxis)
 					y.push(item.yAxis)
@@ -104,8 +105,21 @@
 					xAxis: {
 						data: x
 					},
-					yAxis: {},
+					grid: {
+						left: '12%'
+					},
+					yAxis: {
+						axisLabel: {
+							formatter: function (val) {
+								if (that.state === 'showNum') {
+									return ((val / 10000) + 'w' )
+								}
+								return val
+							}
+						}
+					},
 					series: [{
+						smooth: true,
 						name: '销量',
 						type: 'line',
 						data: y,
@@ -149,7 +163,7 @@
 			float: left;
 			.placeholder{
 				box-sizing: border-box;
-				margin:5px 20px;
+				margin:5px 10px;
 				height: 80px;
 				line-height: 80px;
 				text-align: center;
