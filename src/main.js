@@ -46,12 +46,12 @@ Vue.prototype.getData = function (url, myparam, params, myFun) {
         }
       }
     } else {
-      console.log(data.data.msg)
+      console.log(data.data.result)
     }
     this.isloadding = false
   }, (data) => {
     this.isloadding = false
-    console.log('留空-报错信息')
+    this.$dialog('链接出错')
   })
 }
 const app = new Vue({

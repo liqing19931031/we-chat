@@ -43,26 +43,26 @@ const router = new VueRouter({
 	base: __dirname,
 	routes: [
 		{
-			path: '/',
-			redirect: '/login'
+			path: '/wxdsp/',
+			redirect: '/wxdsp/login'
 		},
 		{
-			path: '/home',
+			path: '/wxdsp/home',
 	      	component: home,
 	      	name: '首页'
 	    },
 	    {
-	      	path: '/login',
+	      	path: '/wxdsp/login',
 	      	component: login,
 	      	name: '登录'
 	    },
 	    {
-			path: '/user',
+			path: '/wxdsp/user',
 	      	component: user,
 	     	name: '账户'
 	    },
 	    {
-	      	path: '/pop/:type',
+	      	path: '/wxdsp/pop/:type',
 	      	component: pop,
 	      	children: [
 	      		{
@@ -82,7 +82,7 @@ const router = new VueRouter({
 	      	]
 	    },
 	    {
-	      path: '/report/:type',
+	      path: '/wxdsp/report/:type',
 	      component: report,
 	      name: '推广报告'
 	    }

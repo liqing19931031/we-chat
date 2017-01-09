@@ -117,9 +117,11 @@
 	        </div>
 	        <div class="white-block"></div>
 		</div>
+		<loadding v-if='this.isloadding'></loadding>
 	</div>
 </template>
 <script>
+import loadding from '../component/loadding.vue'
 let user
 let pcData
 let mbData
@@ -128,13 +130,17 @@ export default {
 		return {
 			user: user,
 			pcData: pcData,
-			mbData: mbData
+			mbData: mbData,
+			isloadding: false
 		}
 	},
 	mounted () {
 		this.getData('/dsp/getOwnerInfo', 'user')
 		this.getData('/dsp/getReportData', 'pcData', { type: 1 })
 		this.getData('/dsp/getReportData', 'mbData', { type: 2 })
+	},
+	components: {
+		loadding: loadding
 	},
 	methods: {
 		gopop: function (index) {

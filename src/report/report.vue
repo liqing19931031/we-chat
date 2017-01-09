@@ -15,7 +15,7 @@
 						<div class="placeholder" v-bind:class="state === key ? 'weui-bar__item_in' : ''" 
 						@click='changeType(key)'>
 							<span>{{allType[key]}}</span>
-							<span>{{item}}</span>
+							<span>{{key === 'clickPrice' ? '￥' : ''}}{{key === 'allCost' ? '￥' : ''}}{{key === 'costPrice' ? '￥' : ''}}{{item}}{{key === 'clickRate' ? '%' : ''}}</span>
 						</div>
 					</div>
 					<div class="clearBoth"></div>
@@ -27,7 +27,7 @@
 						<div class="placeholder" v-bind:class="state === key ? 'weui-bar__item_in' : ''"
 						@click='changeType(key)'>
 							<span>{{allType[key]}}</span>
-							<span>{{item}}</span>
+							<span>{{key === 'allCost' ? '￥' : ''}}{{key === 'clickPrice' ? '￥' : ''}}{{item}}{{key === 'clickRate' ? '%' : ''}}</span>
 						</div>
 					</div>
 					<div class="clearBoth"></div>
@@ -120,7 +120,6 @@
 					},
 					series: [{
 						smooth: true,
-						name: '销量',
 						type: 'line',
 						data: y,
 						lineStyle: {

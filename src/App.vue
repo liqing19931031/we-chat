@@ -3,37 +3,37 @@
     <transition :name="transitionName">
         <router-view></router-view>
     </transition>
-    <div class="weui-tabbar" v-if="$root.$route.fullPath !== '/login'">
+    <div class="weui-tabbar" v-if="$root.$route.fullPath !== '/wxdsp/login'">
         <a class="weui-tabbar__item" @click='hideNav'>
-          <router-link to="/home">
+          <router-link to="/wxdsp/home">
             <span style="display: inline-block;position: relative;">
-                <img :src="$root.$route.fullPath === '/home' ? require('./assets/Navbar_icon/select_home.png') : require('./assets/Navbar_icon/normal_home.png')" alt="" class="weui-tabbar__icon">
+                <img :src="$root.$route.fullPath === '/wxdsp/home' ? require('./assets/Navbar_icon/select_home.png') : require('./assets/Navbar_icon/normal_home.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">首页</p>
           </router-link>
         </a>
         <a class="weui-tabbar__item" @click='shownav(1)'>
             <div class="weui-actionsheet__menu" v-if="showPop">
-                <div class="weui-actionsheet__cell"><router-link to='/pop/1'>网盟推广活动</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/pop/2'>移动推广活动</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/pop/1'>网盟推广活动</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/pop/2'>移动推广活动</router-link></div>
             </div>
-            <img :src="!$root.$route.fullPath.indexOf('/pop') ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
+            <img :src="!$root.$route.fullPath.indexOf('/wxdsp/pop') ? require('./assets/Navbar_icon/select_promote.png') : require('./assets/Navbar_icon/normal_promote.png')" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推广</p>
         </a>
-        <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/report') ? 'router-link-active' : ''" @click='shownav'>
+        <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/wxdsp/report') ? 'router-link-active' : ''" @click='shownav'>
             <div class="weui-actionsheet__menu" v-if="showNav">
-                <div class="weui-actionsheet__cell"><router-link to='/report/1'>全景推广报告</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/report/2'>网盟推广报告</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/report/3'>移动推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/1'>全景推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/2'>网盟推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/3'>移动推广报告</router-link></div>
             </div>
             <span style="display: inline-block;position: relative;">
-                <img :src="!$root.$route.fullPath.indexOf('/report') ? require('./assets/Navbar_icon/select_report.png') : require('./assets/Navbar_icon/normal_report.png')" alt="" class="weui-tabbar__icon">
+                <img :src="!$root.$route.fullPath.indexOf('/wxdsp/report') ? require('./assets/Navbar_icon/select_report.png') : require('./assets/Navbar_icon/normal_report.png')" alt="" class="weui-tabbar__icon">
             </span>
             <p class="weui-tabbar__label">报告</p>
         </a>
         <a class="weui-tabbar__item" @click='hideNav'>
-          <router-link to="/user">
-            <img :src="$root.$route.fullPath === '/user' ? require('./assets/Navbar_icon/select_account.png') : require('./assets/Navbar_icon/normal_account.png')" alt="" class="weui-tabbar__icon">
+          <router-link to="/wxdsp/user">
+            <img :src="$root.$route.fullPath === '/wxdsp/user' ? require('./assets/Navbar_icon/select_account.png') : require('./assets/Navbar_icon/normal_account.png')" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">账户</p>
           </router-link>
         </a>
@@ -41,7 +41,6 @@
   </div>
 </template>
 <script>
-let showNav
 export default {
   name: 'app',
   data () {
@@ -125,7 +124,7 @@ body{
 .weui-actionsheet__menu{
   position: absolute;
   bottom: 53px;
-  padding: 0 10px;
+  padding: 0 5px;
   border-radius: 6px;
   box-shadow: 0px 0px 8px 0px rgba(112, 111, 107, 0.75);
   .weui-actionsheet__cell{

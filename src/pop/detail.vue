@@ -112,7 +112,7 @@
 	            <div class="weui-cell__bd">
 	                <p>花费</p>
 	            </div>
-	            <div class="weui-cell__ft">{{details.cost}}</div>
+	            <div class="weui-cell__ft">￥{{details.cost}}</div>
 	        </div>
 		</div>
 	</div>

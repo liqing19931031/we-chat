@@ -15,8 +15,8 @@
 					</div>
 				</div>
 				<div class="weui-flex page nopadding">
-		            <div class="weui-flex__item"><div class="placeholder text-center h6">账户余额:&nbsp&nbsp&nbsp<span>{{users.total}}</span></div></div>
-		            <div class="weui-flex__item"><div class="placeholder text-center h6">账户积分:&nbsp&nbsp&nbsp<span>{{users.balance}}</span></div></div>
+		            <div class="weui-flex__item"><div class="placeholder text-center h6">账户余额:&nbsp&nbsp&nbsp<span>￥{{users.balance}}</span></div></div>
+		            <div class="weui-flex__item"><div class="placeholder text-center h6">账户积分:&nbsp&nbsp&nbsp<span>{{users.total}}</span></div></div>
 		        </div>
 			</div>
 	        <div class="info-service">
@@ -40,27 +40,19 @@
 	        	</div>
 	        </div>
 	        <div class="button-sp-area" style="margin:30px 15px 0 15px">
-	        	<a href='/login' class="weui-btn weui-btn_default">退出登录</a>
+	        	<a href='/wxdsp/' class="weui-btn weui-btn_default">退出登录</a>
 	        </div>
 	        <div class="white-block"></div>
 		</div>
+		<loadding v-if='this.isloadding'></loadding>
 	</div>
 </template>
 <script>
-	const mapping = {
-		company: '企业名称',
-		siteName: '网站名称',
-		domain: '网站地址',
-		serviceName: '服务顾问',
-		servicePhone: '联系方式',
-		serviceMail: '邮箱地址'
-	}
-	const userState = ['账户未通过审核', '账户审核通过', '待审核']
-	let users
+import loadding from '../component/loadding.vue'
 	export default {
 		data () {
 			return {
-				mappding: {
+				mapping: {
 					company: '企业名称',
 					siteName: '网站名称',
 					domain: '网站地址',
@@ -76,19 +68,17 @@
 					servicePhone: require('../assets/contact@3x.png'),
 					serviceMail: require('../assets/email@3x.png')
 				},
-				users: users,
-				mapping: mapping,
-				userState: userState
+				users: '',
+				userState: ['账户未通过审核', '账户审核通过', '待审核'],
+				isloadding: false
 			}
+		},
+		components: {
+			loadding: loadding
 		},
 		mounted () {
 			// 异步获取数据
-			this.$http.get(this.baseUrl + 'dsp/getOwnerDetail')
-			.then((data) => {
-				this.$set(this, 'users', data.data.result)
-			}, (data) => {
-				console.log('系统出错!')
-            })
+			this.getData('dsp/getOwnerDetail', 'users')
 		}
 	}
 </script>

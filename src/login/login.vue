@@ -37,14 +37,14 @@ export default {
 		},
 		goLogin () {
 			this.$http.post(this.baseUrl + 'wechat/login', this.params)
-			.then((response)=> {
+			.then((response) => {
 				if (response.data.code === 1) {
 					this.$router.push('/home')
 				} else {
-					showAlert(response.data.msg)
+					this.showAlert(response.data.result)
 				}
 			})
-			.catch((response)=> {
+			.catch((response) => {
 				this.showAlert('网络出错!')
 			})
 		}
