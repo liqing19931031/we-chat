@@ -64,7 +64,7 @@
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
-	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/pop/1'>
+	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/wxdsp/pop/1'>
 	                    <div class="weui-cell__bd">查看详情</div>
 	                    <span class="weui-cell__ft"></span>
 	                </router-link>
@@ -109,7 +109,7 @@
 		        	</div>
 		        </div>
 				<div class="weui-panel__ft">
-	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/pop/2'>
+	                <router-link class="weui-cell weui-cell_access weui-cell_link" to='/wxdsp/pop/2'>
 	                    <div class="weui-cell__bd">查看详情</div>
 	                    <span class="weui-cell__ft"></span>
 	                </router-link>

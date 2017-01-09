@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <transition :name="transitionName">
+    <div @click='hideNav'>
         <router-view></router-view>
-    </transition>
+    </div>
     <div class="weui-tabbar" v-if="$root.$route.fullPath !== '/wxdsp/login'">
         <a class="weui-tabbar__item" @click='hideNav'>
           <router-link to="/wxdsp/home">
@@ -22,9 +22,9 @@
         </a>
         <a class="weui-tabbar__item" :class="!$root.$route.fullPath.indexOf('/wxdsp/report') ? 'router-link-active' : ''" @click='shownav'>
             <div class="weui-actionsheet__menu" v-if="showNav">
-                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/1'>全景推广报告</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/2'>网盟推广报告</router-link></div>
-                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/3'>移动推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/1'>网盟推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/2'>移动推广报告</router-link></div>
+                <div class="weui-actionsheet__cell"><router-link to='/wxdsp/report/3'>全景推广报告</router-link></div>
             </div>
             <span style="display: inline-block;position: relative;">
                 <img :src="!$root.$route.fullPath.indexOf('/wxdsp/report') ? require('./assets/Navbar_icon/select_report.png') : require('./assets/Navbar_icon/normal_report.png')" alt="" class="weui-tabbar__icon">
@@ -142,6 +142,7 @@ body{
       height: 2.3em;
       line-height: 2.3em;
       font-size: 14px;
+      color: #333333;
       &.h0{
         height: 1.5em;
         line-height: 1.5em;
@@ -178,7 +179,6 @@ body{
       }
       &.h4{
         margin-left: 0;
-        color: black;
         font-size: 17px;
       }
       &.h5{

@@ -4,9 +4,9 @@
 		<div class="login-form">
 			<input type="text" placeholder="账户名/手机号码" name="username" v-model='params.username'>
 			<input type="password" placeholder="密码" name="key" v-model='params.key'>
-			<div class="remember-me" @click='remember'>
+			<!-- <div class="remember-me" @click='remember'>
 				<i v-bind:class="[ isremember ? 'weui-icon-circle' : 'weui-icon-success' ]" class="we-success"></i> 记住我
-			</div>
+			</div> -->
 			<div class="login-btn">
 				<div class="btn" @click='goLogin'>
 					立即登录
@@ -39,7 +39,7 @@ export default {
 			this.$http.post(this.baseUrl + 'wechat/login', this.params)
 			.then((response) => {
 				if (response.data.code === 1) {
-					this.$router.push('/home')
+					this.$router.push('/wxdsp/home')
 				} else {
 					this.showAlert(response.data.result)
 				}
@@ -67,7 +67,7 @@ export default {
 			height: 50px;
 		}
 		.login-form{
-			padding-top: 125px;
+			padding-top: 75px;
 			width: 300px;
 			margin: 0 auto;
 			input{
@@ -83,17 +83,17 @@ export default {
 				width: 300px;
 			}
 			input + input {
-				margin-top: 25px;
+				margin-top: 50px;
 			}
 			.remember-me{
-				font-size: 16px;
+				font-size: 14px;
 				float: left;
 				height: 24px;
 				width: 300px;
 				margin: 25px auto;
 				vertical-align: bottom;
 				i{
-					font-size: 14px;
+					font-size: 16px;
 					&.weui-icon-circle{
 						color: #666666;
 					}
@@ -104,7 +104,7 @@ export default {
 			}
 			.login-btn{
 				width: 300px;
-				margin: 20px auto;
+				margin: 50px auto;
 				float: left;
 				.btn{
 					box-sizing: border-box;

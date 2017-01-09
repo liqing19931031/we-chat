@@ -27,8 +27,8 @@ Vue.prototype.isloadding = false
 Vue.prototype.colors = [
         '',
         'success',
-        'warning',
         'stop',
+        'warning',
         'error'
       ]
 // 对原异步请求方式进行再封装 1: 请求地址 2: 要设置的变量 3: 请求变量 4: 回调方法 或者是递增数组

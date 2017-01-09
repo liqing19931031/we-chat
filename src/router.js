@@ -21,7 +21,7 @@ let weixinTile = function(title) {
         }, 0);
     }
 
-    function createDom(htmlStr){
+    function createDom (htmlStr) {
         var tmp = document.createElement('div');
         tmp.innerHTML = htmlStr;
         var children = tmp.childNodes;
@@ -34,8 +34,9 @@ let weixinTile = function(title) {
     }
 }
 const myArray = {
-	report: ['', '全景', '网盟', '移动'],
-	pop: ['', '网盟', '移动']
+	report: ['', '网盟', '移动', '全景'],
+	pop: ['', '网盟推广', '移动推广'],
+	pops: ['', '计划', '单元', '创意']
 }
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -72,12 +73,12 @@ const router = new VueRouter({
 	        	{
 		          	path: 'detail',
 		          	component: detail,
-		          	name: '推广详情'
+		          	name: '详情'
 		        },
 		        {
 		          	path: 'list',
 		          	component: lists,
-		          	name: '推广列表'
+		          	name: '活动'
 		        }
 	      	]
 	    },
@@ -93,9 +94,9 @@ router.afterEach((to, from, next) => {
 	myName = to.name
 	if (to.params.type) {
 		if (to.path.indexOf('report') > 0) {
-			myName = myArray.report[to.params.type] + myName
+			myName = [myArray.report[to.params.type], myName].join('')
 		} else {
-			myName = myArray.pop[to.params.type] + myName
+			myName = [myArray.pop[to.params.type], myArray.pops[to.query.nowList ? to.query.nowList : 0], myName].join('')
 		}
 	}
   	weixinTile(myName)

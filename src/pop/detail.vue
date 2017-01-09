@@ -106,7 +106,7 @@
 	            <div class="weui-cell__bd">
 	                <p>点击单价</p>
 	            </div>
-	            <div class="weui-cell__ft">{{details.clickPrice}}</div>
+	            <div class="weui-cell__ft">￥{{details.clickPrice}}</div>
 	        </div>
 	        <div class="weui-cell" v-if="details.cost">
 	            <div class="weui-cell__bd">
@@ -124,8 +124,8 @@ export default {
 			stats: [
 				'',
 				'有效',
-				'暂停',
 				'未在投放时间段',
+				'暂停',
 				'审核中',
 				'审核拒绝',
 				'删除'

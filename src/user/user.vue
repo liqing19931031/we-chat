@@ -36,11 +36,13 @@
 		            <div class="weui-cell__bd">
 		                <p>{{mapping[key]}}</p>
 		            </div>
-		            <div class="weui-cell__ft">{{value}}</div>
+		            <div class="weui-cell__ft">
+						{{value}}
+		            </div>
 	        	</div>
 	        </div>
 	        <div class="button-sp-area" style="margin:30px 15px 0 15px">
-	        	<a href='/wxdsp/' class="weui-btn weui-btn_default">退出登录</a>
+	        	<a href='/wxdsp' class="weui-btn weui-btn_default">退出登录</a>
 	        </div>
 	        <div class="white-block"></div>
 		</div>
@@ -153,7 +155,7 @@ import loadding from '../component/loadding.vue'
 						}
 					}
 					.weui-flex__item + .weui-flex__item{
-						border-left: 1px solid #333333;
+						border-left: 1px solid #999999;
 					}
 				}
 		  	}
